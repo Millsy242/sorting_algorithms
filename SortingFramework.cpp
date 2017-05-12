@@ -25,7 +25,8 @@ int main (int argc, char * const argv[])
 	printArrayContents(array, arraySize);
 
 	//bubbleSort(array, arraySize);
-	//shuttleSort(array, arraySize);
+
+	shuttleSort(array, arraySize);
 	//selectionSort(array, arraySize);
 	//insertionSort(array, arraySize);
 
@@ -34,6 +35,12 @@ int main (int argc, char * const argv[])
 	delete[] array;
 
 	return 0;
+}
+static void Swap(int* a, int* b)
+{
+	*a ^= *b;
+	*b ^= *a;
+	*a ^= *b;
 }
 
 
@@ -58,15 +65,52 @@ static void printArrayContents(const int * const array, const int size)
 static void bubbleSort(int *array, const int size)
 {
 	// TODO : implement the bubble sort algorithm
+	int count{0};
+	while(count != size)
+	{
+	int temp;
 	for(int i{0}; i<size; i++)
 	{
-        if()
+        if(array[i]>array[i+1])
+        {
+            temp = array[i+1];
+            array[i+1] = array[i];
+            array[i] = temp;
+
+        }
+	}
+	count++;
 	}
 }
 
 static void shuttleSort(int *array, const int size)
 {
 	// TODO : implement the shuttle sort algorithm
+	while (1)
+	{
+		char flag;
+		int start[2] = { 1, size - 1 };
+		int end[2] = { size, 0 };
+		int inc[2] = { 1, -1 };
+
+		for (int i{0}; i < 2; i++)
+		{
+			flag = 1;
+
+			for (int i = start[i]; i != end[i]; i += inc[i])
+			{
+				if (array[i - 1] > array[i])
+				{
+					Swap(array + i - 1, array + i);
+					flag = 0;
+				}
+			}
+
+			if (flag)
+                return;
+		}
+	}
+
 }
 
 static void selectionSort(int *array, const int size)
@@ -78,5 +122,6 @@ static void insertionSort(int *array, const int size)
 {
 	// TODO : implement the insertion sort algorithm
 }
+
 
 
